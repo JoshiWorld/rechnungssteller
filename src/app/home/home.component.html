@@ -1,0 +1,12 @@
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="col-lg-4 col-md-6 col-sm-8">
+    <form (ngSubmit)="submitCode()">
+      <div class="form-group text-center">
+        <input [(ngModel)]="masterPassword" type="password" id="password" class="form-control" placeholder="Enter code.." [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

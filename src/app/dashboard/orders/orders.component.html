@@ -1,0 +1,54 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of pagedItems">
+      <td><a routerLink="/order/{{ item.uuid }}">{{ item.id }}</a></td>
+      <td>{{ item.title }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [(page)]="currentPage" [pageSize]="pageSize" [collectionSize]="totalItems" (pageChange)="pageChanged($event)"></ngb-pagination>
+</div>
+
+<div class="container">
+  <h2>Create New Order</h2>
+  <form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="title">Order Title</label>
+      <input type="text" class="form-control" id="title" [(ngModel)]="orderTitle" name="title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="articles">Articles</label>
+
+      <div *ngFor="let article of selectedArticles; let i = index">
+        <p>{{article}}</p>
+      </div>
+
+      <div class="form-group">
+        <select class="form-control" id="articles" [(ngModel)]="selectedArticle" name="articles">
+          <option value="">Select an article</option>
+          <option *ngFor="let article of articles" [value]="article.id">{{ article.title }}</option>
+        </select>
+        <button type="button" class="btn btn-primary" (click)="addArticle()">Add Article</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <div class="alert alert-success" role="alert" *ngIf="dataSent">
+      <a [href]="createdLink">Link zur Order</a>
+    </div>
+  </form>
+</div>

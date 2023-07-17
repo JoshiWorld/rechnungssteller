@@ -1,0 +1,74 @@
+<div *ngIf="orderContent && orderContent.user; else elseBlock">
+  <div class="container">
+    <form (ngSubmit)="submitData()">
+      <h1>{{ orderContent.title }}</h1>
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="orderContent.user.email" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="forename">Vorname</label>
+        <input type="text" id="forename" class="form-control" [(ngModel)]="orderContent.user.forename" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="surname">Nachname</label>
+        <input type="text" id="surname" class="form-control" [(ngModel)]="orderContent.user.surname" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="street">Strasse & Haus Nr.</label>
+        <input type="text" id="street" class="form-control" [(ngModel)]="orderContent.user.street" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="city">Stadt</label>
+        <input type="text" id="city" class="form-control" [(ngModel)]="orderContent.user.city" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="country">Land</label>
+        <input type="text" id="country" class="form-control" [(ngModel)]="orderContent.user.country" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <div class="form-group">
+        <label for="zip">PLZ</label>
+        <input type="text" id="zip" class="form-control" [(ngModel)]="orderContent.user.zip" [ngModelOptions]="{ standalone: true }">
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Artikel</th>
+          <th>Preis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of orderContent.articles">
+          <td>{{ item.title }}</td>
+          <td>{{ item.price + ' €' }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-success" role="alert" *ngIf="dataSent">
+        Deine Daten wurden erfolgreich abgeschickt!
+        Du erhälst in kürze eine Rechnung an die angegebene E-Mail-Adresse!
+      </div>
+
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">Abschicken</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+      <form (ngSubmit)="submitCode()">
+        <div class="form-group text-center">
+          <input [(ngModel)]="orderCode" type="password" id="password" class="form-control" placeholder="Enter code.." [ngModelOptions]="{ standalone: true }">
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-primary">Abschicken</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
