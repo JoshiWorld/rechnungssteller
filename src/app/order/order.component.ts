@@ -29,7 +29,7 @@ export class OrderComponent implements OnInit {
 
 
   submitData(): void {
-    const url = 'http://localhost:3001/order/sendOrder';
+    const url = 'https://shop.brokoly.de/api/order/sendOrder';
     const options = {
       headers: new HttpHeaders({
         'Accept': 'application/json',
@@ -37,7 +37,7 @@ export class OrderComponent implements OnInit {
       })
     };
 
-    this.http.put('http://localhost:3001/user/update/' + this.orderContent?.user.id, {
+    this.http.put('https://shop.brokoly.de/api/user/update/' + this.orderContent?.user.id, {
       updatedUser: this.orderContent?.user
     }, options).subscribe(
       (response) => {
@@ -74,7 +74,7 @@ export class OrderComponent implements OnInit {
   }
 
   private checkPageIdOrderExists(): Promise<boolean> {
-    const url = 'http://localhost:3001/order/' + this.pageId;
+    const url = 'https://shop.brokoly.de/api/order/' + this.pageId;
     const options = {
       headers: new HttpHeaders({
         'Accept': 'application/json'

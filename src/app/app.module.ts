@@ -9,6 +9,9 @@ import { OrdersModule } from './dashboard/orders/orders.module';
 import { OrderComponent } from './order/order.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { SecurityComponent } from './footer/security/security.component';
+import { ImpressumComponent } from './footer/impressum/impressum.component';
 
 @NgModule({
   imports: [
@@ -23,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     DashboardComponent,
     OrderComponent,
+    FooterComponent,
+    SecurityComponent,
+    ImpressumComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

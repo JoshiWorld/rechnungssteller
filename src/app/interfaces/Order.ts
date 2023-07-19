@@ -6,7 +6,7 @@ export interface Order {
     title: string;
     invoice: string;
     user: User;
-    paid: boolean;
+    paid: number;
     uuid: string;
     articles: Article[];
 }

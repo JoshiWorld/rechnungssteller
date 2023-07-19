@@ -3,18 +3,36 @@
     <thead>
     <tr>
       <th>Id</th>
-      <th>Name</th>
+      <th>Titel</th>
+      <th>Kundenmail</th>
+      <th>Bezahlt</th>
+      <th></th> <!-- Add an empty header for the remove button -->
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let item of pagedItems">
       <td><a routerLink="/order/{{ item.uuid }}">{{ item.id }}</a></td>
       <td>{{ item.title }}</td>
+      <td>{{ item.user.email }}</td>
+      <td>
+        <ng-container *ngIf="item.paid == 1; else notPaid">
+          Bezahlt
+        </ng-container>
+        <ng-template #notPaid>
+          <button class="btn btn-primary" (click)="setPaid(item)">Nein</button>
+        </ng-template>
+      </td>
+      <td>
+        <button class="btn btn-link" (click)="removeItem(item)">
+          <i class="bi">X</i> <!-- Replace 'bi bi-trash' with the appropriate trashcan icon class -->
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
   <ngb-pagination [(page)]="currentPage" [pageSize]="pageSize" [collectionSize]="totalItems" (pageChange)="pageChanged($event)"></ngb-pagination>
 </div>
+
 
 <div class="container">
   <h2>Create New Order</h2>

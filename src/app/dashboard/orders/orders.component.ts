@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../orders.service';
-import * as $ from 'jquery';
 import 'bootstrap';
 import { Article } from '../../interfaces/Article';
-
-interface Order {
-  id: number;
-  title: string;
-  uuid: string;
-}
+import { Location } from '@angular/common';
+import { Order } from '../../interfaces/Order';
 
 @Component({
   selector: 'app-orders',
@@ -33,7 +28,7 @@ export class OrdersComponent implements OnInit {
   dataSent: boolean = false;
   createdLink: string = '';
 
-  constructor(private dataService: OrdersService) {}
+  constructor(private dataService: OrdersService, private location: Location) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -50,7 +45,7 @@ export class OrdersComponent implements OnInit {
     this.dataService.pushNewOrder(this.orderTitle, this.email, this.selectedArticles).subscribe(
       (response) => {
         console.log('Order submitted:', response);
-        this.createdLink = 'http://localhost:4200/order/' + response.uuid;
+        this.createdLink = 'https://shop.brokoly.de/order/' + response.uuid;
         this.dataSent = true;
       },
       (error) => {
@@ -60,8 +55,28 @@ export class OrdersComponent implements OnInit {
     );
   }
 
+  removeItem(item: Order): void {
+    this.dataService.removeArticle(item).subscribe(() => {
+      // Item successfully removed
+      this.location.back();
+    }, (error) => {
+      // Handle error
+      console.error('Error removing item:', error);
+    });
+  }
+
+  setPaid(item: Order): void {
+    this.dataService.setPaid(item).subscribe(() => {
+      // Item successfully paid
+      this.location.back();
+    }, (error) => {
+      // Handle error
+      console.error('Error paid item:', error);
+    });
+  }
+
+
   loadData(): void {
-    // Replace this with your actual data retrieval logic
     this.dataService.getData().subscribe(data => {
       this.items = data;
       this.totalItems = this.items.length;

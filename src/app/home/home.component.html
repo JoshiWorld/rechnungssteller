@@ -5,6 +5,7 @@
         <input [(ngModel)]="masterPassword" type="password" id="password" class="form-control" placeholder="Enter code.." [ngModelOptions]="{ standalone: true }">
       </div>
       <div class="text-center mt-3">
+        <button *ngIf="isAuthenticated" (click)="navigateToDashboard()" class="btn btn-primary">Go to Dashboard</button>
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>

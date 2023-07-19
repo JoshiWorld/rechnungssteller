@@ -24,7 +24,7 @@ export class AuthService {
       return of(false); // No token found, return false immediately
     }
 
-    const url = `http://localhost:3001/master/verify?token=${token}`;
+    const url = `https://shop.brokoly.de/api/master/verify?token=${token}`;
 
     return this.http.get(url).pipe(
       map((response) => true),
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   login(password: string): void {
-    const url = `http://localhost:3001/master/get?password=${password}`;
+    const url = `https://shop.brokoly.de/api/master/get?password=${password}`;
 
     this.http.get(url).subscribe((response) => {
       // @ts-ignore
